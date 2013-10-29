@@ -1,0 +1,17 @@
+
+*.lock
+
+/Pods/*
+
+*.xcodeproj
+
+
+
+STViewer.xcworkspace/contents.xcworkspacedata
+
+STViewer.xcworkspace/xcuserdata/grimax.xcuserdatad/UserInterfaceState.xcuserstate
+
+STViewer.xcworkspace/xcuserdata/grimax.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+
+STViewer.xcworkspace/xcuserdata/grimax.xcuserdatad/WorkspaceSettings.xcsettings
+

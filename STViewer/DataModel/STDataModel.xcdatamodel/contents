@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F45" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="STAccount" representedClassName="STAccount" parentEntity="STComment" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serverId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="roles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STRole" inverseName="accounts" inverseEntity="STRole" syncable="YES"/>
+    </entity>
+    <entity name="STBatteryStatus" representedClassName="STBatteryStatus" parentEntity="STComment" syncable="YES">
+        <attribute name="batteryLevel" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="batteryState" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="STComment" representedClassName="STComment" parentEntity="STDatum" syncable="YES">
+        <attribute name="commentText" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="STDatum" inverseName="comments" inverseEntity="STDatum" syncable="YES"/>
+    </entity>
+    <entity name="STDatum" representedClassName="STDatum" isAbstract="YES" syncable="YES">
+        <attribute name="cts" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lts" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="sqts" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="sts" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="ts" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="xid" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STComment" inverseName="owner" inverseEntity="STComment" syncable="YES"/>
+    </entity>
+    <entity name="STEntity" representedClassName="STEntity" parentEntity="STComment" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="actingRoles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STEntityRole" inverseName="actorEntity" inverseEntity="STEntityRole" syncable="YES"/>
+        <relationship name="properties" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STEntityProperty" inverseName="hostEntities" inverseEntity="STEntityProperty" syncable="YES"/>
+        <relationship name="roles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STEntityRole" inverseName="hostEntity" inverseEntity="STEntityRole" syncable="YES"/>
+    </entity>
+    <entity name="STEntityProperty" representedClassName="STEntityProperty" parentEntity="STComment" syncable="YES">
+        <attribute name="propertyId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hostEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STEntity" inverseName="properties" inverseEntity="STEntity" syncable="YES"/>
+    </entity>
+    <entity name="STEntityRole" representedClassName="STEntityRole" parentEntity="STComment" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="actorEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STEntity" inverseName="actingRoles" inverseEntity="STEntity" syncable="YES"/>
+        <relationship name="hostEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STEntity" inverseName="roles" inverseEntity="STEntity" syncable="YES"/>
+    </entity>
+    <entity name="STItem" representedClassName="STItem" parentEntity="STEntity" syncable="YES">
+        <relationship name="itemActingRoles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STItemRole" inverseName="actorItem" inverseEntity="STItemRole" syncable="YES"/>
+        <relationship name="itemProperties" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STItemProperty" inverseName="item" inverseEntity="STItemProperty" syncable="YES"/>
+        <relationship name="itemRoles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STItemRole" inverseName="hostItem" inverseEntity="STItemRole" syncable="YES"/>
+    </entity>
+    <entity name="STItemProperty" representedClassName="STItemProperty" parentEntity="STEntityProperty" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STItem" inverseName="itemProperties" inverseEntity="STItem" syncable="YES"/>
+    </entity>
+    <entity name="STItemRole" representedClassName="STItemRole" parentEntity="STEntityRole" syncable="YES">
+        <relationship name="actorItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STItem" inverseName="itemActingRoles" inverseEntity="STItem" syncable="YES"/>
+        <relationship name="hostItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STItem" inverseName="itemRoles" inverseEntity="STItem" syncable="YES"/>
+    </entity>
+    <entity name="STLocation" representedClassName="STLocation" parentEntity="STComment" syncable="YES">
+        <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="course" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="horizontalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="speed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="verticalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="STLogMessage" representedClassName="STLogMessage" parentEntity="STComment" syncable="YES">
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="STRole" representedClassName="STRole" parentEntity="STComment" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STAccount" inverseName="roles" inverseEntity="STAccount" syncable="YES"/>
+    </entity>
+    <entity name="STSettings" representedClassName="STSettings" parentEntity="STComment" syncable="YES">
+        <attribute name="group" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="STAccount" positionX="232" positionY="-108" width="128" height="120"/>
+        <element name="STBatteryStatus" positionX="70" positionY="-108" width="128" height="75"/>
+        <element name="STComment" positionX="-18" positionY="216" width="128" height="75"/>
+        <element name="STDatum" positionX="-45" positionY="-18" width="128" height="165"/>
+        <element name="STEntity" positionX="-198" positionY="273" width="128" height="105"/>
+        <element name="STEntityProperty" positionX="196" positionY="303" width="128" height="73"/>
+        <element name="STEntityRole" positionX="-18" positionY="396" width="128" height="90"/>
+        <element name="STItem" positionX="-234" positionY="477" width="128" height="90"/>
+        <element name="STItemProperty" positionX="178" positionY="486" width="128" height="75"/>
+        <element name="STItemRole" positionX="-18" positionY="576" width="128" height="75"/>
+        <element name="STLocation" positionX="-450" positionY="24" width="128" height="165"/>
+        <element name="STLogMessage" positionX="-360" positionY="222" width="128" height="75"/>
+        <element name="STRole" positionX="234" positionY="108" width="128" height="90"/>
+        <element name="STSettings" positionX="-236" positionY="-36" width="128" height="90"/>
+    </elements>
+</model>

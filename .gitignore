@@ -3,10 +3,6 @@
 
 /Pods/*
 
-*.xcodeproj
-
-
-
 STViewer.xcworkspace/contents.xcworkspacedata
 
 STViewer.xcworkspace/xcuserdata/grimax.xcuserdatad/UserInterfaceState.xcuserstate
